@@ -24,6 +24,7 @@ builder.Services.AddSwaggerGen(c =>
             Email = "your.email@example.com"
         }
     });
+    c.EnableAnnotations();
 });
 
 var app = builder.Build();
@@ -38,6 +39,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Library API V1");
         c.RoutePrefix = string.Empty; // Serve the Swagger UI at the app's root
     });
+
 
     //app.MapOpenApi();
 }

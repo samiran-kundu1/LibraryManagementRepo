@@ -1,4 +1,5 @@
 ﻿using LibraryModule.DTO;
+using LibraryModule.Mapper;
 using LibraryModule.Models;
 using LibraryModule.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace LibraryModule.Controllers
 
         // POST: api/Library/AddBook
         [HttpPost("AddBook")]
-        public IActionResult AddBook([FromBody] Book book)
+        public IActionResult AddBook([FromBody] BookDTO book)
         {
             try
             {
@@ -32,6 +33,8 @@ namespace LibraryModule.Controllers
                 return Conflict(new { message = inEx.Message });
             }
         }
+
+
 
         // DELETE: api/Library/RemoveBook/{id}
         [HttpDelete("RemoveBook/{id}")]
@@ -53,7 +56,7 @@ namespace LibraryModule.Controllers
 
         // POST: api/Library/RegisterUser
         [HttpPost("RegisterUser")]
-        public IActionResult RegisterUser([FromBody] User user)
+        public IActionResult RegisterUser([FromBody] UserDTO user)
         {
             _bookLibraryService.RegisterUser(user.Name);
             return Ok("User registered successfully.");
@@ -91,7 +94,7 @@ namespace LibraryModule.Controllers
         public IActionResult GetAllBooks()
         {
             var books = _bookLibraryService.GetAllBooks();
-            return Ok(books);
+            return Ok(books.MapToBooksDTOList());
         }
     }
 
