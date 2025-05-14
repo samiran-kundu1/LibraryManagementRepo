@@ -83,14 +83,14 @@ namespace LibraryModule.Controllers
         }
 
         // GET: api/Library/GetBorrowedBooks/{userId}
-        [HttpGet("GetBorrowedBooks/{userId}")]
+        [HttpGet("BorrowedBooks/{userId}")]
         public IActionResult GetBorrowedBooks(int userId)
         {
             var books = _bookLibraryService.GetBorrowedBooks(userId);
             return Ok(books);
         }
 
-        [HttpGet()]
+        [HttpGet("Books")]
         public IActionResult GetAllBooks()
         {
             var books = _bookLibraryService.GetAllBooks();
